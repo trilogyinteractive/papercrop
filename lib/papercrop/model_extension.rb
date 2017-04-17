@@ -21,7 +21,11 @@ module Papercrop
       def crop_attached_file(attachment_name, opts = {})
         opts = opts.dup
 
-        [:crop_x, :crop_y, :crop_w, :crop_h, :original_w, :original_h, :box_w, :aspect, :cropped_geometries].each do |a|
+        [
+          :crop_x, :crop_y, :crop_w, :crop_h, 
+          :original_w, :original_h, :resized_h, :resized_w, 
+          :box_w, :aspect, :cropped_geometries
+        ].each do |a|
           attr_accessor :"#{attachment_name}_#{a}"
         end
 

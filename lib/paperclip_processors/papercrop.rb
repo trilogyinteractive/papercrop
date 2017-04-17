@@ -17,11 +17,18 @@ module Paperclip
 
       if target.cropping?(@attachment.name)
         begin
-          w = Integer(target.send :"#{@attachment.name}_crop_w")
-          h = Integer(target.send :"#{@attachment.name}_crop_h")
-          x = Integer(target.send :"#{@attachment.name}_crop_x")
-          y = Integer(target.send :"#{@attachment.name}_crop_y")
-          ["-crop", "#{w}x#{h}+#{x}+#{y}"]
+          cropW = Integer(target.send :"#{@attachment.name}_crop_w")
+          cropH = Integer(target.send :"#{@attachment.name}_crop_h")
+
+          cropX = Integer(target.send :"#{@attachment.name}_crop_x")
+          cropY = Integer(target.send :"#{@attachment.name}_crop_y")
+
+          sizeX = Integer(target.send :"#{@attachment.name}_resized_h")
+          sizeY = Integer(target.send :"#{@attachment.name}_resized_w")
+          [
+            "-resize", "#{sizeX}x#{sizeY}",
+            "-crop",   "#{cropW}x#{cropH}+#{cropX}+#{cropY}"
+          ]
         rescue Exception => e
           ::Papercrop.log("[papercrop] #{@attachment.name} crop w/h/x/y were non-integer. Error: #{e.to_s}")
           return 
