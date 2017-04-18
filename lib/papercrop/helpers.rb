@@ -56,6 +56,9 @@ module Papercrop
         box  = hidden_field(:"#{attachment}_original_w", value: cropbox.original_width)
         box << hidden_field(:"#{attachment}_original_h", value: cropbox.original_height)
 
+        box << hidden_field(:"#{attachment}_resized_w",  value: cropbox.original_width)
+        box << hidden_field(:"#{attachment}_resized_h",  value: cropbox.original_height)
+
         [:crop_x, :crop_y, :crop_w, :crop_h].each do |attribute|
           box << hidden_field(:"#{attachment}_#{attribute}", id: "#{attachment}_#{attribute}")
         end

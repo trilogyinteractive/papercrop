@@ -1569,6 +1569,19 @@
         // careful: internal values are returned
         return options;
       },
+      /*
+        THIS IS A PATCHED METHOD THAT WAS NEVER RELEASED!
+        http://stackoverflow.com/a/12914140/408244
+        https://github.com/tapmodo/Jcrop/pull/69
+      */
+      resizeImage: function(width, height) {
+        boundx = width;
+        boundy = height;
+        
+        $([$img2, $img, $div, $trk]).each(function(index, element) {
+          element.width(width).height(height);
+        });
+       },
 
       ui: {
         holder: $div,

@@ -16,6 +16,13 @@ module Paperclip
       target = @attachment.instance
 
       if target.cropping?(@attachment.name)
+        ::Papercrop.log("crop_w: #{Integer(target.send :"#{@attachment.name}_crop_w")}")
+        ::Papercrop.log("crop_h: #{Integer(target.send :"#{@attachment.name}_crop_h")}")
+        ::Papercrop.log("crop_x: #{Integer(target.send :"#{@attachment.name}_crop_x")}")
+        ::Papercrop.log("crop_y: #{Integer(target.send :"#{@attachment.name}_crop_y")}")
+        ::Papercrop.log("resized_h: #{Integer(target.send :"#{@attachment.name}_resized_h")}")
+        ::Papercrop.log("resized_w: #{Integer(target.send :"#{@attachment.name}_resized_w")}")
+
         begin
           cropW = Integer(target.send :"#{@attachment.name}_crop_w")
           cropH = Integer(target.send :"#{@attachment.name}_crop_h")

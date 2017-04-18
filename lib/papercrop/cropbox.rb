@@ -51,6 +51,7 @@ class Papercrop::Cropbox
   # @param opts [Hash] Options for jcrop, :width and :aspect are aliases for :box_width and :aspect_ratio
   # This is because retro compatibility with older versions.
   def parse_jcrop_opts(opts)
+    ::Papercrop.log("opts are: #{opts}")
     parsed = opts.clone
 
     parsed[:box_width]    = parsed[:width]  if parsed[:box_width].nil?
@@ -61,6 +62,10 @@ class Papercrop::Cropbox
     parsed[:box_width]    = original_width                            if parsed[:box_width].nil?
     parsed[:aspect_ratio] = @model.send("#{@attachment_name}_aspect") if parsed[:aspect_ratio].nil?
     parsed[:set_select]   = parsed.fetch :set_select, [0, 0, (original_width / 2), (original_height / 2)]
+    
+    parsed[:true_size]    = [original_width, original_height]
+    parsed[:allow_select] = false
+    parsed[:allow_resize] = false
   
     parsed
   end
